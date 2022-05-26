@@ -31,6 +31,9 @@ Listening on port 8080
 
 Остальные пункты при втором и тд запусках нужно пропускать.
 
+
+
+
 Endpoits:
 ```
 PATCH:'http://localhost:8080/todo/{id}'
@@ -41,6 +44,9 @@ DELETE:http://localhost:8080/todo/{id}'
 ```
 POST:'http://localhost:8080/todo'
 ```
+
+
+
 где id - это id соответствующего ToDo Item'a
 
 `+` баллы за то, что инпут-чекбокс будет высылать PATCH запрос на сервер,
