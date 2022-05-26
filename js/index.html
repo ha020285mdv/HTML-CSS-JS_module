@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<div id="content">
+    <!--    Это пример, как должна выглядеть TODOшка-->
+    <div class="todo" data-id="0">
+        <h2 class="title">
+            Lorem, ipsum dolor.
+        </h2>
+        <div class="body">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae minus aliquam eveniet natus nesciunt?
+        </div>
+        <div class="completed">
+            <label>Is completed
+                <input type="checkbox">
+            </label>
+        </div>
+        <button class="delete">X</button>
+    </div>
+</div>
+<div class="formWrapper">
+    <h2>Add new todo</h2>
+    <form id="form" action="#">
+        <label for="title">Enter name</label>
+        <input type="text" id="title" name="title">
+        <label for="body">Enter name</label>
+        <input type="text" id="body" name="body">
+        <label for="completed">Is completed</label>
+        <input type="checkbox" name="completed" id="completed">
+        <button type="submit" id="submit">Submit</button>
+    </form>
+</div>
+
+<script src="script.js">
+</script>
+</body>
+
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <title>TEST</title>
+    <style>
+        body {
+            font-family: roboto, arial;
+        }
+
+        .maine {
+            width: 1020px;
+            margin: 0 auto;
+            padding: 30px 10px 30px 10px;
+
+        }
+
+        h2 {
+            margin: 60px 0 20px 0;
+        }
+
+        .maine h1, h2, p {
+            text-align: center;
+        }
+
+        .border {
+            border: 1px solid;
+            padding: 5px
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+            border: 1px solid;
+        }
+
+        .inbox {
+            width: 50px;
+            height: 50px;
+            border: 1px solid;
+            margin: 23px auto;
+            background: white;
+        }
+
+        .selectbox5 {
+            display: flex;
+            flex-wrap: wrap;
+
+
+        }
+
+        .selectbox4b {
+            min-height: 300px;
+        }
+
+    </style>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+
+<div class="maine">
+
+    <h1>Селекторы</h1>
+    <hr>
+    <p>
+        Используйте только один селектор!
+    </p>
+    <hr>
+    <h2>Установите всем первым дочерним дивам контейнера .selectbox красный фон</h2>
+
+    <div class="selectbox border">
+
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+    </div>
+
+    <style>
+        /* Напишите ваш код здесь*/
+        .selectbox > .box {
+            background-color: tomato;
+        }
+    </style>
+
+    <h2>Установите всем дочерним дивам контейнера красный фон</h2>
+    <div class="selectbox2 border">
+
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+    </div>
+
+    <style>
+        .selectbox2 div {
+            background-color: tomato;
+        }
+    </style>
+
+    <h2>Выделите цветом первый дочерний елемент .list (Используйте специализированый псевдоклас) </h2>
+    <ol class="list">
+        <li>Text</li>
+        <li>Text</li>
+        <li>Text</li>
+        <li>Text</li>
+        <li>Text</li>
+    </ol>
+    <style>
+        /* Напишите ваш код здесь*/
+        .list li:first-child {
+            color: blueviolet;
+        }
+    </style>
+
+
+    <h2>Выделите цветом последний дочерний елемент .list2 (Используйте специализированый псевдоклас) </h2>
+    <ol class="list2">
+        <li>Text</li>
+        <li>Text</li>
+        <li>Text</li>
+        <li>Text</li>
+        <li>Text</li>
+    </ol>
+    <style>
+        /* Напишите ваш код здесь*/
+        .list2 li:last-child {
+            color: blueviolet;
+        }
+    </style>
+
+
+    <h2>Реализуйте выделения четвертого элемента при наведении на второй.</h2>
+    <ol class="list3">
+        <li>Text</li>
+        <li>при наведении на меня</li>
+        <li>Text</li>
+        <li>должен выделятся я</li>
+        <li>Text</li>
+    </ol>
+    <style>
+        /* Напишите ваш код здесь*/
+        .list3 li:nth-child(2):hover ~ li:nth-child(4){
+            color: blue;
+        }
+    </style>
+
+    <h1>Flex-box</h1>
+    <hr>
+    <p>
+        Используйте только один селектор!
+    </p>
+    <hr>
+    <h2>Поставьте элементы в ряд используя только flex-box</h2>
+
+    <div class="selectbox3 border">
+
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+    </div>
+
+    <style>
+        /* Напишите ваш код здесь*/
+        .selectbox3 {
+            display: flex;
+        }
+    </style>
+
+
+    <h2>Поставьте элементы в ряд и распределите их равномерно, используя только flex-box</h2>
+
+    <div class="selectbox4 border">
+
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+    </div>
+
+    <style>
+        /* Напишите ваш код здесь*/
+        .selectbox4 {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+    </style>
+
+    <h2>Поставьте элементы в ряд и выравняйте их по центру по горизонтали и вертикали, используя только flex-box</h2>
+
+    <div class="selectbox4b border">
+
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+    </div>
+
+    <style>
+        /* Напишите ваш код здесь*/
+        .selectbox4b {
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        }
+    </style>
+
+    <h2>Поставьте элементы в колонку используя только flex-box</h2>
+
+    <div class="selectbox5 border">
+
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+    </div>
+
+    <style>
+        /* Напишите ваш код здесь*/
+        .selectbox5 {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+    <h1>Float</h1>
+
+    <h2>Поставьте элементы в ряд, используя только свойство Float. Дочерние div контейнера box должны остаться по
+        центру.</h2>
+
+    <div class="selectbox6 border">
+
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+    </div>
+
+    <style>
+        /* Напишите ваш код здесь.
+        Используйте только два стиля*/
+        .selectbox6 .box {
+            float: left
+        }
+
+        .selectbox6 {
+            overflow: hidden;
+        }
+    </style>
+
+    <h2>Поставьте элементы в левой и правой стороне, используя только свойство Float. </h2>
+
+    <div class="selectbox7 border">
+
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+
+        <div class="box">
+            <div class="inbox"></div>
+        </div>
+    </div>
+
+    <style>
+        /* Напишите ваш код здесь.
+        Используйте только три стиля*/
+        .selectbox7 .box:first-child {
+            float: left;
+        }
+
+        .selectbox7 .box:last-child {
+            float: right
+        }
+
+        .selectbox7 {
+            overflow: hidden;
+        }
+    </style>
+
+
+    <h1>Шрифты</h1>
+    <h2>Поменяйте шрифт абзадца на шрифт Lobster (Google Fonts)</h2>
+    <p class="fonts">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus sapiente facilis beatae harum itaque
+        similique quod aliquid quam cum temporibus.
+    </p>
+
+
+    <style>
+        /* Напишите ваш код здесь.    */
+        .fonts {
+            font-family: 'Lobster', cursive;
+        }
+
+
+    </style>
+
+
+</div>
+</body>
+</html>

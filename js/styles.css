@@ -1,0 +1,57 @@
+#content,
+.formWrapper {
+  width: 768px;
+  min-height: 100px;
+  margin: 0 auto;
+  background-color: azure;
+  display: flex;
+  flex-flow: column;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+
+.todo {
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.delete {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.empty {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 300px;
+  align-items: center;
+}
+
+h2 {
+  margin: 5px 0;
+}
+
+.formWrapper {
+  margin-top: 20px;
+  background-color: lavenderblush;
+}
+
+#form {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+#form > * {
+  width: 45%;
+  margin-bottom: 10px;
+}
+
+#form button {
+  margin: 0 auto;
+}
