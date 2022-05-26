@@ -1,8 +1,7 @@
 function print(some) {console.log(some)};
 
 const submit = document.getElementById("submit");
-
-submit.onclick = function(event) {return false;}
+submit.onclick = function(event) {return false;};
 
 
 
@@ -20,29 +19,41 @@ submit.addEventListener("click", function() {
         body: body,
         completed: completed
     };
-
+    // передаем подготовленные данные на сервер и создаем новый TODO
     poster(data_to_post);
+
+    document.getElementById("form").reset();
+
+
+
 });
 
 
 async function poster(data) {
+    // передаем данные на сервер
     let response = await fetch('http://localhost:8080/todo', {
         method: 'POST',
         headers: {'Content-Type': 'application/json;charset=utf-8'},
         body: JSON.stringify(data)
     });
-
-    let result = await response.json();
     
-    print(result);
+    // ответ с сервера передаем на создание нового элемента
+    let result = await response.json();
+    creator(result.id, result.title, result.body, result.completed);
+    
+    // создаем/обновляем обработчик для удаления
+    let closers = document.querySelectorAll(".delete");
+    for (closer of closers) {
+        closer.addEventListener("click", function() {
+            deleter(closer.parentNode.dataset.id);
+            //closer.parentNode.remove();
+        });
+    }
 }
 
 
-const add = document.getElementById("new");
-add.addEventListener("click", creator(2, 'new', 'new text', true));
-
-
 function creator(id, title, body, completed) {
+    //хотел сделать клонированием, но в учебных целях создавал каждый элемент отдельно
     newToDo = document.createElement("div");
     newToDo.classList.add("todo");
     newToDo.dataset.id = id;
@@ -70,6 +81,21 @@ function creator(id, title, body, completed) {
     newInput.checked = completed;
     newLabel.appendChild(newInput);    
 
+    newDelete = document.createElement("button");
+    newDelete.classList.add("delete");
+    newDelete.innerText = "X";
+    newToDo.appendChild(newDelete);
+
     content = document.getElementById("content");
     content.appendChild(newToDo);
+}
+
+
+async function deleter(id) {
+    let response = await fetch('http://localhost:8080/todo/' + id, {
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json;charset=utf-8'},
+    });
+
+    let result = await response.json();
 }
