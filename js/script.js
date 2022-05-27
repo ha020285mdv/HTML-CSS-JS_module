@@ -1,59 +1,31 @@
-function print(some) {console.log(some)};
-
 const submit = document.getElementById("submit");
+
+// отключаем стандартное поведение submit
 submit.onclick = function(event) {return false;};
 
 
-
+// вешаем на submit валидацию и вызов функции-публикатора
 submit.addEventListener("click", function() {
-    title = document.getElementById("title").value;
-    body = document.getElementById("body").value;
-    completed = document.getElementById("completed").checked;
-
-    if (title == "") {
+    let data_to_post = {
+        title: document.getElementById("title").value,
+        body: document.getElementById("body").value,
+        completed: document.getElementById("completed").checked
+    };
+    if (data_to_post.title == "") {
         return alert("Title is required")
     }
-
-    let data_to_post = {
-        title: title,
-        body: body,
-        completed: completed
-    };
-    // передаем подготовленные данные на сервер и создаем новый TODO
+    // поставил этот костыль, потому что сервер не принимает "" в качестве body:
+    if (data_to_post.body == "") {
+        data_to_post.body = " "
+    }
+    // передаем данные на сервер и создаем новый TODO
     poster(data_to_post);
-
     document.getElementById("form").reset();
-
-
-
 });
 
 
-async function poster(data) {
-    // передаем данные на сервер
-    let response = await fetch('http://localhost:8080/todo', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json;charset=utf-8'},
-        body: JSON.stringify(data)
-    });
-    
-    // ответ с сервера передаем на создание нового элемента
-    let result = await response.json();
-    creator(result.id, result.title, result.body, result.completed);
-    
-    // создаем/обновляем обработчик для удаления
-    let closers = document.querySelectorAll(".delete");
-    for (closer of closers) {
-        closer.addEventListener("click", function() {
-            deleter(closer.parentNode.dataset.id);
-            //closer.parentNode.remove();
-        });
-    }
-}
-
-
+// создает новый TODO и сразу же развешивает события на элементы
 function creator(id, title, body, completed) {
-    //хотел сделать клонированием, но в учебных целях создавал каждый элемент отдельно
     newToDo = document.createElement("div");
     newToDo.classList.add("todo");
     newToDo.dataset.id = id;
@@ -88,14 +60,50 @@ function creator(id, title, body, completed) {
 
     content = document.getElementById("content");
     content.appendChild(newToDo);
+
+    //вешаем обработчик на удаление
+    newDelete.addEventListener("click", function() {deleter(id);});
+
+    //вешаем обработчик на изменение
+    input = document.querySelector(`[data-id="${id}"]` + ' input[type="checkbox"]');
+    input.addEventListener("click", function() {updater(id);});    
 }
 
+//публикатор
+async function poster(data) {
+    // передаем данные на сервер
+    let response = await fetch('http://localhost:8080/todo', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json;charset=utf-8'},
+        body: JSON.stringify(data)
+    });
+    if (response.ok) {
+        // ответ с сервера передаем на создание нового элемента
+        let result = await response.json();
+        creator(result.id, result.title, result.body, result.completed);
+    }
+}
 
+//делитер
 async function deleter(id) {
     let response = await fetch('http://localhost:8080/todo/' + id, {
         method: 'DELETE',
         headers: {'Content-Type': 'application/json;charset=utf-8'},
     });
+    if (response.ok) {
+        document.querySelector(`[data-id="${id}"]`).remove();
+    }
+}
 
-    let result = await response.json();
+//для обновления
+//ПРОБЛЕМА: запрос уходит, приходит 202 ответ, в файле БД происходит какое-то обновление, но содержимое не меняется
+async function updater(id, completed) {
+    data = {
+        completed: document.querySelector(`[data-id="${id}"]` + ' input[type="checkbox"]').checked
+    }
+    let response = await fetch('http://localhost:8080/todo/' + id, {
+        method: 'PATCH',
+        headers: {'Content-Type': 'application/json; charset=utf-8'},
+        body: JSON.stringify(data)
+    });
 }
